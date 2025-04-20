@@ -1,8 +1,6 @@
 <template>
   <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-
     <a href="/" class="navbar-brand col-sm-3 col-md-2 mr-0">tgInsights <span class="version">v{{ appVersion }}</span></a>
-
     <form @submit.prevent="searchSubmit" class="search-input-form">
       <input
           v-model="searchValue"
@@ -19,9 +17,9 @@
     <div class="search-controls-form">
       <ul class="navbar-nav px-3">
         <li class="nav-item">
-          <select v-model="selectedTimerange" class="header-select bg-dark text-white" id="form-select-input">
+          <select v-model="selectedTimeRange" class="header-select bg-dark text-white" id="form-select-input">
             <option
-                v-for="(title, value) in timeranges"
+                v-for="(title, value) in timeRanges"
                 :value="value"
                 :key="value"
             >{{ title }}</option>
@@ -56,47 +54,49 @@
 -->
   </nav>
 </template>
-<script>
+<script setup>
+import {computed, ref, watch} from "vue";
+import {TimeRanges} from "@/constants.js";
+import {useRoute} from "vue-router";
 // import LogOut from "@/components/LogOut.vue";
 // import TelegramConnection from "@/components/TelegramConnection.vue";
 // import LastMessages from "@/components/LastMessages.vue";
 
-export default {
+
 //  components: {LogOut, TelegramConnection, LastMessages},
-  data() {
-    return {
-      strict: true,
-      searchValue: '',
-      selectedTimerange: 'day',
-      timeranges: {hour: 'Last hour', day: 'Last day', week: 'Last week', month: 'Last month'},
-      appVersion: import.meta.env.VITE_APP_VERSION
-    }
-  },
-  created() {
-    if (this.$route.name === 'messages.search') {
-      this.searchValue = this.$route.params.searchValue
-      this.strict = this.$route.params.strict
-      this.selectedTimerange = this.$route.params.timerange
-    }
-  },
-  emits: ['searchSubmit'],
-  computed: {
-    isSearchSubmitAllowed() {
-      return this.searchValue
-          && this.searchValue.length > 2
-          && !this.$route.path.includes(
-              `${encodeURI(this.searchValue)}/${this.strict}/${this.selectedTimerange}`
-          )
-    }
-  },
-  methods: {
-    searchSubmit() {
-      if (this.isSearchSubmitAllowed) {
-        this.$emit('searchSubmit', this.searchValue, this.strict, this.selectedTimerange)
-      }
-    }
+
+const strict = ref(true)
+const searchValue = ref('')
+const selectedTimeRange = ref(TimeRanges.DAY)
+const timeRanges = {
+  [TimeRanges.HOUR]: 'Last hour',
+  [TimeRanges.DAY]: 'Last day',
+  [TimeRanges.WEEK]: 'Last week',
+  [TimeRanges.MONTH]: 'Last month'
+}
+const appVersion = import.meta.env.VITE_APP_VERSION
+
+watch(useRoute(), (newRoute) => {
+  if (newRoute.name === 'messages.search') {
+    searchValue.value = newRoute.params.searchValue
+    strict.value = newRoute.params.strict
+    selectedTimeRange.value = newRoute.params.timerange
+  }
+})
+
+const emit = defineEmits(['searchSubmit'])
+
+const isSearchSubmitAllowed = computed(() => {
+  return searchValue.value && searchValue.value.length > 2
+})
+
+const searchSubmit = () => {
+  if (isSearchSubmitAllowed) {
+    emit('searchSubmit', searchValue.value, strict.value, selectedTimeRange.value)
   }
 }
+
+
 </script>
 <style scoped>
   .navbar-brand {
