@@ -1,30 +1,23 @@
 <script setup>
   import {RouterView} from 'vue-router'
-  import {useRoute, useRouter} from "vue-router";
+  import {useRoute} from "vue-router";
   import AppHeader from "@/components/AppHeader.vue";
 
   const route = useRoute()
   //const router = useRouter()
 
-  const searchSubmit = (data, strict, timerange) => {
-    console.log([data, strict, timerange])
-    // router.push({
-    //   name: 'messages.search',
-    //   params: {searchValue: data, strict: strict, timerange: timerange}
-    // })
-  }
+
 </script>
 
 <template>
-  <AppHeader
-    v-if="route.meta.showHeader"
-    @search-submit="(data, strict, timerange) => searchSubmit(data, strict, timerange)"
-  />
+  <AppHeader v-if="route.meta.showHeader" />
+
   <div class="container-fluid">
     <div class="row">
       <RouterView :key="route.fullPath"/>
     </div>
   </div>
+
 </template>
 
 <style>

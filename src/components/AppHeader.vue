@@ -84,15 +84,18 @@ watch(useRoute(), (newRoute) => {
   }
 })
 
-const emit = defineEmits(['searchSubmit'])
-
 const isSearchSubmitAllowed = computed(() => {
   return searchValue.value && searchValue.value.length > 2
 })
 
 const searchSubmit = () => {
   if (isSearchSubmitAllowed) {
-    emit('searchSubmit', searchValue.value, strict.value, selectedTimeRange.value)
+
+    console.log([searchValue.value, strict.value, selectedTimeRange.value])
+    // router.push({
+    //   name: 'messages.search',
+    //   params: {searchValue: data, strict: strict, timerange: timerange}
+    // })
   }
 }
 
