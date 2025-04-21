@@ -15,7 +15,7 @@
     return username.value.length > 0 && password.value.length > 0
   })
 
-  const [apiCallError, loader, response, callApi] = useApiClient()
+  const [apiCallError, loader, response, callApi] = useApiClient(true)
 
   const submitCredentials = async () => {
 
@@ -44,6 +44,9 @@
       }
     }
   }
+  const hideAlert = () => {
+    apiCallError.value = null
+  }
 </script>
 
 <template>
@@ -62,6 +65,7 @@
           v-if="apiCallError"
           :message="apiCallError"
           alert-class="alert-danger"
+          @hide-alert="hideAlert"
       />
 
       <div v-if="!loader" class="form-group">

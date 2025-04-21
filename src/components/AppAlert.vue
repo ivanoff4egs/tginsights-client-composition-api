@@ -4,19 +4,15 @@
     alertClass: {type: String, required: true},
     message: {type: String, required: true},
   })
-  const emits = defineEmits(['hideError', 'hideSuccess'])
-  const hideAlert = (alertClass) => {
-      if (alertClass === 'alert-danger') {
-        emits('hideError')
-      } else if (alertClass === 'alert-success') {
-        emits('hideSuccess')
-      }
-    }
+  const emits = defineEmits(['hideAlert'])
+  const hideAlert = () => {
+    emits('hideAlert')
+  }
 </script>
 
 <template>
   <div class="alert" :class="alertClass">
-    <button type="button" class="close" aria-label="Close" @click="hideAlert(props.alertClass)">
+    <button type="button" class="close" aria-label="Close" @click="hideAlert()">
       <span aria-hidden="true">&times;</span>
     </button>
     <p>{{ props.message }}</p>
@@ -25,7 +21,8 @@
 
 <style scoped>
   .alert p {
-    font-size: medium
+    font-size: medium;
+    margin: 0;
   }
 
   div.alert-danger, div.alert-danger .close {

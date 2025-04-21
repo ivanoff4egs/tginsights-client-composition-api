@@ -4,7 +4,7 @@ import {useRouter} from "vue-router";
 import {ref, reactive} from "vue";
 import {useAuthStore} from "@/stores/auth.js";
 
-export function useApiClient() {
+export function useApiClient(ignore401Error = false) {
 
   const apiCallError = ref(null)
   const loader = ref(null)
@@ -29,12 +29,12 @@ export function useApiClient() {
 
       return response
     } catch (error) {
-      if (error.response && error.response.status === 401) {
+      if (error.status === 401 && !ignore401Error) {
         auth.username = null
         auth.isAuthenticated = false
         await router.replace({name: 'login'})
       } else {
-        apiCallError.value = error.response ? error.response.data.message : error.message
+        apiCallError.value = error.response ? error.response.data : error.message
       }
     } finally {
       loader.value = false
