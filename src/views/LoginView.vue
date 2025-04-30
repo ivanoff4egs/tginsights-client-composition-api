@@ -15,7 +15,7 @@
     return username.value.length > 0 && password.value.length > 0
   })
 
-  const [apiCallError, loader, response, callApi] = useApiClient(true)
+  const {apiCallError, loader, response, callApi} = useApiClient(true)
 
   const submitCredentials = async () => {
 
