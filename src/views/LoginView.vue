@@ -27,7 +27,7 @@
 
       await callApi('POST', '/login', null, payload)
 
-      if (response.value && response.value.status === 204) {
+      if (response.value.status === 204) {
         const auth = useAuthStore()
         auth.isAuthenticated = true
         auth.username = username.value
@@ -65,7 +65,7 @@
           v-if="apiCallError"
           :message="apiCallError"
           alert-class="alert-danger"
-          @hide-alert="hideAlert"
+          @hide-alert="apiCallError = null"
       />
 
       <div v-if="!loader" class="form-group">

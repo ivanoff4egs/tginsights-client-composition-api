@@ -29,8 +29,7 @@ export function useApiClient(ignore401Error = false) {
         data: payload
       })
 
-      response.value = res.data
-
+      response.value = res.status === 204 ? res : res.data
     } catch (error) {
       if (error.status === 401 && !ignore401Error) {
         auth.username = null
