@@ -20,17 +20,18 @@ const routes = [
     component: () => import('@/views/FavoritesView.vue'),
     meta: { requiresAuth: true, showHeader: true }
   },
+  // {
+  //   path: '/channels',
+  //   name: 'channels',
+  //   component: () => import('@/views/ChannelsView.vue'),
+  //   meta: { requiresAuth: true, showHeader: true }
+  // },
   {
-    path: '/channels',
-    name: 'channels',
-    component: () => import('@/views/ChannelsView.vue'),
+    path: '/channel/:id',
+    name: 'channel.view',
+    component: () => import('@/views/ChannelView.vue'),
     meta: { requiresAuth: true, showHeader: true }
   },
-  // {
-  //   path: '/channel/:id',
-  //   name: 'channel.view',
-  //   component: () => import('@/views/ChannelView.vue')
-  // },
   // {
   //   path: '/messages/search/:searchValue/:strict/:timerange',
   //   name: 'messages.search',

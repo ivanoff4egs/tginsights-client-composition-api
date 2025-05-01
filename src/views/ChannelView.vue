@@ -30,18 +30,17 @@
       return false
     }
 
-    if (action === ChannelActions.STOP && channel.user_channels[0].favorite) {
+    if (action === ChannelActions.STOP && channel.value.user_channels[0].favorite) {
       if (!window.confirm('Channel is favorite. Are you sure?')) {
         return false
       }
-    } else if (action === ChannelActions.LIKE && !channel.user_channels[0].active) {
+    } else if (action === ChannelActions.LIKE && !channel.value.user_channels[0].active) {
       if (!window.confirm('Channel is stopped. Continue?')) {
         return false
       }
     }
 
     await callApi('PATCH', `channel/${route.params.id}/${action}`)
-    channel.value = response
   }
 </script>
 
