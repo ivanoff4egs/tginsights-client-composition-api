@@ -27,6 +27,10 @@
     --ban-color: #bd2130;
     --ok-color: #007000;
     --favorite-color: #c5c51c;
+    --popper-theme-background-color: var(--main-font-color);
+    --popper-theme-text-color: white;
+    --popper-theme-padding: 5px;
+    --popper-theme-border-radius: 5px;
   }
 
   #app {
