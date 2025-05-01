@@ -76,7 +76,9 @@ const timeRanges = {
 }
 const appVersion = import.meta.env.VITE_APP_VERSION
 
-watch(useRoute(), (newRoute) => {
+const route = useRoute()
+
+watch(route, (newRoute) => {
   if (newRoute.name === 'messages.search') {
     searchValue.value = newRoute.params.searchValue
     strict.value = newRoute.params.strict

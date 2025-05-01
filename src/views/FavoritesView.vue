@@ -3,13 +3,13 @@
   import AppAlert from "@/components/AppAlert.vue";
   import AppTooltip from "@/components/AppTooltip.vue";
   //import MessageSource from "@/components/MessageSource.vue";
-  import {useApiClient} from "@/composables/apiClient";
+  import useApiClient from "@/composables/apiClient";
   //import MessageMatches from "@/components/MessageMatches.vue";
   //import MessageVersions from "@/components/MessageVersions.vue";
   import {onMounted} from "vue";
   import {formatDate} from "@/functions.js"
 
-  const {apiCallError, loader, response, callApi} = useApiClient(false)
+  const {apiCallError, loader, response, callApi} = useApiClient()
 
   onMounted(() => {
     getChannels()

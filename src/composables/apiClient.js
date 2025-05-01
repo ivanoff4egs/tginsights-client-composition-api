@@ -4,7 +4,7 @@ import {useRouter} from "vue-router";
 import {ref, reactive} from "vue";
 import {useAuthStore} from "@/stores/auth.js";
 
-export function useApiClient(ignore401Error = false) {
+export default function useApiClient(ignore401Error = false) {
 
   const apiCallError = ref(null)
   const loader = ref(null)

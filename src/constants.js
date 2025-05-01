@@ -4,3 +4,10 @@ export const TimeRanges = {
   WEEK: 'week',
   MONTH: 'month'
 }
+
+export const ChannelActions = {
+  START: 'start',
+  STOP: 'stop',
+  LIKE: 'like',
+  DISLIKE: 'dislike'
+}

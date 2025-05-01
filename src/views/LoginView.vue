@@ -1,6 +1,6 @@
 <script setup>
   import AppAlert from "@/components/AppAlert.vue";
-  import {useApiClient} from "@/composables/apiClient.js";
+  import useApiClient from "@/composables/apiClient.js";
   import {useRoute, useRouter} from "vue-router";
   import {useAuthStore} from "@/stores/auth";
   import {ref, computed} from "vue";
@@ -43,9 +43,6 @@
         router.replace({name: redirectTo, params: redirectParams})
       }
     }
-  }
-  const hideAlert = () => {
-    apiCallError.value = null
   }
 </script>
 
