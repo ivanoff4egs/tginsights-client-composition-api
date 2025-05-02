@@ -5,7 +5,7 @@
   import ChannelMessages from "@/components/ChannelMessages.vue";
   import AppTooltip from "@/components/AppTooltip.vue";
   import useApiClient from "@/composables/apiClient";
-  import {ref, reactive, onMounted} from "vue";
+  import {onMounted} from "vue";
   import {useRoute, useRouter} from "vue-router";
   import {ChannelActions} from "@/constants.js";
   import {formatDate} from "@/functions.js";

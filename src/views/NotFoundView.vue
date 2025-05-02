@@ -8,7 +8,7 @@
                   <h2>
                       404 Not Found</h2>
                   <div class="error-details">
-                      Sorry, an error has occured, Requested page not found!
+                      Sorry, an error has occurred, requested page is not found!
                   </div>
                   <div class="error-actions">
                       <RouterLink :to="{name: 'home'}" class="btn btn-dark btn-lg"><span class="glyphicon glyphicon-home"></span>

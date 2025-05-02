@@ -7,6 +7,7 @@
 
   const username = ref('')
   const password = ref('')
+  const redirectTo = ref('/')
 
   const route = useRoute()
   const router = useRouter()
@@ -32,15 +33,11 @@
         auth.isAuthenticated = true
         auth.username = username.value
 
-        let redirectTo = 'home'
-        let redirectParams = {}
-
-        if (route.redirectedFrom) {
-          redirectTo = route.redirectedFrom.name
-          redirectParams = route.redirectedFrom.params
+        if (route.query.redirectedFrom) {
+          redirectTo.value = route.query.redirectedFrom
         }
 
-        router.replace({name: redirectTo, params: redirectParams})
+        await router.replace({path: redirectTo.value})
       }
     }
   }
