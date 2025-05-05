@@ -1,13 +1,14 @@
 <script setup>
-  import AppSidebar from "@/components/AppSidebar.vue";
-  import AppAlert from "@/components/AppAlert.vue";
-  import AppTooltip from "@/components/AppTooltip.vue";
+  import AppSidebar from "@/components/App/AppSidebar.vue";
+  import AppAlert from "@/components/App/AppAlert.vue";
+  import AppTooltip from "@/components/App/AppTooltip.vue";
+  import RefreshIcon from "@/components/App/Icons/RefreshIcon.vue";
   //import MessageSource from "@/components/MessageSource.vue";
   import useApiClient from "@/composables/apiClient";
   //import MessageMatches from "@/components/MessageMatches.vue";
   //import MessageVersions from "@/components/MessageVersions.vue";
   import {onMounted} from "vue";
-  import {formatDate} from "@/functions.js"
+  import {formatDate} from "@/utils/functions.js"
 
   const {apiCallError, loader, response, callApi} = useApiClient()
 
@@ -33,29 +34,20 @@
           Favorites
         </h2>
       </div>
-        <div class="col-2">
-          <AppTooltip text="Update channels" class="float-right">
-            <div class="page-header-icon update-icon" @click="getChannels()">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2z"/>
-                <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466"/>
-              </svg>
-            </div>
-          </AppTooltip>
-        </div>
+      <div class="col-2">
+        <app-tooltip text="Update channels" class="float-right">
+          <refresh-icon @click="getChannels" />
+        </app-tooltip>
+      </div>
     </div>
 
     <div v-if="loader" class="d-flex justify-content-center">
       <div class="spinner-border text-secondary" role="status"/>
     </div>
 
-    <div v-if="apiCallError">
-      <app-alert
-          :message="apiCallError"
-          alert-class="alert-danger"
-          @hide-error="apiCallError = null"
-      />
-    </div>
+
+    <app-alert v-if="apiCallError" :message="apiCallError" @hide-error="apiCallError = null" />
+
 
     <div v-if="response">
       <div
@@ -93,7 +85,7 @@
     </div>
   </main>
 </template>
-<style>
+<style scoped>
 
   .update-icon:hover {
     color: var(--active-link-color);

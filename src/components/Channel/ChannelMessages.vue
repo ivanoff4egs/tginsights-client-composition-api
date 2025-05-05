@@ -1,11 +1,11 @@
 <script setup>
-  import AppAlert from "@/components/AppAlert.vue";
+  import AppAlert from "@/components/App/AppAlert.vue";
   //import MessageSource from "@/components/MessageSource.vue";
-  import useApiClient from "@/composables/apiClient";
+  import useApiClient from "@/composables/apiClient.js";
   //import MessageMatches from "@/components/MessageMatches.vue";
   //import MessageVersions from "@/components/MessageVersions.vue";
   import {ref, onMounted} from "vue";
-  import {formatDate} from "@/functions.js";
+  import {formatDate} from "@/utils/functions.js";
 
   const props = defineProps({
       channel_id: {type: String, required: true}
@@ -47,13 +47,7 @@
       <div class="spinner-border text-secondary" role="status"/>
     </div>
 
-    <div v-if="apiCallError" class="col-12 mt-3">
-      <app-alert
-        :message="apiCallError"
-        alert-class="alert-danger"
-        @hide-error="apiCallError = null"
-      ></app-alert>
-    </div>
+    <app-alert v-if="apiCallError" :message="apiCallError" @hide-error="apiCallError = null" />
 
     <div v-if="response" class="col-12 mt-3">
       <div v-for="message in response.items" :key="message._id">
@@ -87,6 +81,7 @@
   .card p {
     margin: 0
   }
+
   .card p span {
     font-weight: bold;
   }

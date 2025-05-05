@@ -1,16 +1,63 @@
+<script setup>
+  import {computed, ref, watch} from "vue";
+  import {TimeRanges} from "@/utils/constants.js";
+  import {useRoute} from "vue-router";
+  // import HeaderLogOut from "@/components/HeaderLogOut.vue";
+  // import HeaderTelegramConnection from "@/components/HeaderTelegramConnection.vue";
+  // import HeaderLastMessages from "@/components/HeaderLastMessages.vue";
+
+
+  //  components: {LogOut, TelegramConnection, LastMessages},
+
+  const strict = ref(true)
+  const searchValue = ref('')
+  const selectedTimeRange = ref(TimeRanges.DAY)
+  const timeRanges = {
+    [TimeRanges.HOUR]: 'Last hour',
+    [TimeRanges.DAY]: 'Last day',
+    [TimeRanges.WEEK]: 'Last week',
+    [TimeRanges.MONTH]: 'Last month'
+  }
+  const appVersion = import.meta.env.VITE_APP_VERSION
+
+  const route = useRoute()
+
+  watch(route, (newRoute) => {
+    if (newRoute.name === 'messages.search') {
+      searchValue.value = newRoute.params.searchValue
+      strict.value = newRoute.params.strict
+      selectedTimeRange.value = newRoute.params.timerange
+    }
+  })
+
+  const isSearchSubmitAllowed = computed(() => {
+    return searchValue.value && searchValue.value.length > 2
+  })
+
+  const searchSubmit = () => {
+    if (isSearchSubmitAllowed) {
+
+      console.log([searchValue.value, strict.value, selectedTimeRange.value])
+      // router.push({
+      //   name: 'messages.search',
+      //   params: {searchValue: data, strict: strict, timerange: timerange}
+      // })
+    }
+  }
+</script>
 <template>
   <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-    <a href="/" class="navbar-brand col-sm-3 col-md-2 mr-0">tgInsights <span class="version">v{{ appVersion }}</span></a>
+    <a href="/public" class="navbar-brand col-sm-3 col-md-2 mr-0">tgInsights <span class="version">v{{ appVersion }}</span></a>
     <form @submit.prevent="searchSubmit" class="search-input-form">
       <input
-          v-model="searchValue"
-          class="form-control form-control-dark w-100"
-          type="text"
-          id="form-text-input"
-          placeholder="Search"
-          aria-label="Search"
-          maxlength="256"
-          autocomplete="off"
+        v-model="searchValue"
+        class="form-control form-control-dark w-100"
+        type="text"
+        id="form-text-input"
+        placeholder="Search"
+        aria-label="Search"
+        maxlength="256"
+        autocomplete="off"
       >
     </form>
 
@@ -19,18 +66,18 @@
         <li class="nav-item">
           <select v-model="selectedTimeRange" class="header-select bg-dark text-white" id="form-select-input">
             <option
-                v-for="(title, value) in timeRanges"
-                :value="value"
-                :key="value"
+              v-for="(title, value) in timeRanges"
+              :value="value"
+              :key="value"
             >{{ title }}</option>
           </select>
         </li>
         <li class="nav-item header-checkbox-li">
           <input
-              v-model="strict"
-              type="checkbox"
-              id="form-check-input"
-              class="header-checkbox"
+            v-model="strict"
+            type="checkbox"
+            id="form-check-input"
+            class="header-checkbox"
           >
           <label for="form-check-input" class="header-checkbox-label">
             strict
@@ -38,71 +85,22 @@
         </li>
         <li class="nav-item header-button-li">
           <button
-              @click="searchSubmit"
-              type="button"
-              class="btn btn-dark header-button"
-              :disabled="!isSearchSubmitAllowed"
-              :class="{'disabled' : !isSearchSubmitAllowed}"
+            @click="searchSubmit"
+            type="button"
+            class="btn btn-dark header-button"
+            :disabled="!isSearchSubmitAllowed"
+            :class="{'disabled' : !isSearchSubmitAllowed}"
           >Search</button>
         </li>
       </ul>
     </div>
-<!--
-    <last-messages />
-    <telegram-connection />
-    <log-out />
--->
+    <!--
+        <header-last-messages />
+        <header-telegram-connection />
+        <header-log-out />
+    -->
   </nav>
 </template>
-<script setup>
-import {computed, ref, watch} from "vue";
-import {TimeRanges} from "@/constants.js";
-import {useRoute} from "vue-router";
-// import LogOut from "@/components/LogOut.vue";
-// import TelegramConnection from "@/components/TelegramConnection.vue";
-// import LastMessages from "@/components/LastMessages.vue";
-
-
-//  components: {LogOut, TelegramConnection, LastMessages},
-
-const strict = ref(true)
-const searchValue = ref('')
-const selectedTimeRange = ref(TimeRanges.DAY)
-const timeRanges = {
-  [TimeRanges.HOUR]: 'Last hour',
-  [TimeRanges.DAY]: 'Last day',
-  [TimeRanges.WEEK]: 'Last week',
-  [TimeRanges.MONTH]: 'Last month'
-}
-const appVersion = import.meta.env.VITE_APP_VERSION
-
-const route = useRoute()
-
-watch(route, (newRoute) => {
-  if (newRoute.name === 'messages.search') {
-    searchValue.value = newRoute.params.searchValue
-    strict.value = newRoute.params.strict
-    selectedTimeRange.value = newRoute.params.timerange
-  }
-})
-
-const isSearchSubmitAllowed = computed(() => {
-  return searchValue.value && searchValue.value.length > 2
-})
-
-const searchSubmit = () => {
-  if (isSearchSubmitAllowed) {
-
-    console.log([searchValue.value, strict.value, selectedTimeRange.value])
-    // router.push({
-    //   name: 'messages.search',
-    //   params: {searchValue: data, strict: strict, timerange: timerange}
-    // })
-  }
-}
-
-
-</script>
 <style scoped>
   .navbar-brand {
     padding-top: .75rem;

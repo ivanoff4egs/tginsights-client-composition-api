@@ -1,14 +1,14 @@
 <script setup>
-  import AppSidebar from "@/components/AppSidebar.vue";
-  import ChannelChart from "@/components/ChannelChart.vue";
-  import AppAlert from "@/components/AppAlert.vue";
-  import ChannelMessages from "@/components/ChannelMessages.vue";
-  import AppTooltip from "@/components/AppTooltip.vue";
+  import AppSidebar from "@/components/App/AppSidebar.vue";
+  import ChannelChart from "@/components/Channel/ChannelChart.vue";
+  import AppAlert from "@/components/App/AppAlert.vue";
+  import ChannelMessages from "@/components/Channel/ChannelMessages.vue";
+  import AppTooltip from "@/components/App/AppTooltip.vue";
   import useApiClient from "@/composables/apiClient";
   import {onMounted} from "vue";
   import {useRoute, useRouter} from "vue-router";
-  import {ChannelActions} from "@/constants.js";
-  import {formatDate} from "@/functions.js";
+  import {ChannelActions} from "@/utils/constants.js";
+  import {formatDate} from "@/utils/functions.js";
 
   const {apiCallError, loader, response, callApi} = useApiClient()
   const channel = response
@@ -54,13 +54,7 @@
       <div class="spinner-border text-secondary" role="status"/>
     </div>
 
-    <div v-if="apiCallError">
-      <app-alert
-          alert-class="alert-danger"
-          :message="apiCallError"
-          @hide-error="apiCallError = null"
-      />
-    </div>
+    <app-alert v-if="apiCallError" :message="apiCallError" @hide-error="apiCallError = null" />
 
     <div v-if="channel">
       <div class="row channel-title border-bottom mb-2">
@@ -173,7 +167,7 @@
   </main>
 
 </template>
-<style>
+<style scoped>
 
   .stop-icon:hover {
     color: var(--ban-color);

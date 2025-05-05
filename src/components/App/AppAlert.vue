@@ -1,7 +1,6 @@
 <script setup>
 
   const props = defineProps({
-    alertClass: {type: String, required: true},
     message: {type: String, required: true},
   })
   const emits = defineEmits(['hideAlert'])

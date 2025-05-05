@@ -1,5 +1,5 @@
 <script setup>
-  import AppAlert from "@/components/AppAlert.vue";
+  import AppAlert from "@/components/App/AppAlert.vue";
   import useApiClient from "@/composables/apiClient.js";
   import {useRoute, useRouter} from "vue-router";
   import {useAuthStore} from "@/stores/auth";
@@ -55,14 +55,9 @@
         <div class="spinner-border text-secondary" role="status"/>
       </div>
 
-      <AppAlert
-          v-if="apiCallError"
-          :message="apiCallError"
-          alert-class="alert-danger"
-          @hide-alert="apiCallError = null"
-      />
+      <app-alert v-if="apiCallError" :message="apiCallError" @hide-alert="apiCallError = null" />
 
-      <div v-if="!loader" class="form-group">
+      <div v-if="!response" class="form-group">
         <input
           v-model="username"
           class="form-control"
