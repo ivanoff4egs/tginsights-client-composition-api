@@ -9,6 +9,7 @@
   //import MessageVersions from "@/components/MessageVersions.vue";
   import {onMounted} from "vue";
   import {formatDate} from "@/utils/functions.js"
+  import AppPageHeader from "@/components/App/AppPageHeader.vue";
 
   const {apiCallError, loader, response, callApi} = useApiClient()
 
@@ -28,18 +29,15 @@
 <template>
   <app-sidebar/>
   <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-    <div class="row favorites-title border-bottom mb-2">
-      <div class="col-10">
-        <h2>
-          Favorites
-        </h2>
-      </div>
-      <div class="col-2">
+
+    <app-page-header>
+      <template #title>Favorites</template>
+      <template #icon-0>
         <app-tooltip text="Update channels" class="float-right">
           <refresh-icon @click="getChannels" />
         </app-tooltip>
-      </div>
-    </div>
+      </template>
+    </app-page-header>
 
     <div v-if="loader" class="d-flex justify-content-center">
       <div class="spinner-border text-secondary" role="status"/>

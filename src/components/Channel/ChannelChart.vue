@@ -10,11 +10,11 @@
     Title
   } from 'chart.js'
 
-  import AppAlert from "@/components/AppAlert.vue";
-  import useApiClient from "@/composables/apiClient";
+  import AppAlert from "@/components/App/AppAlert.vue";
+  import useApiClient from "@/composables/apiClient.js";
   import {ref, reactive, onMounted} from "vue";
-  import {TimeRanges} from "@/constants.js";
-  import {formatDate} from "@/functions.js";
+  import {TimeRanges} from "@/utils/constants.js";
+  import {formatDate} from "@/utils/functions.js";
 
   ChartJS.register(Tooltip, CategoryScale, LinearScale, PointElement, LineElement, Title)
 
@@ -65,29 +65,24 @@
 </script>
 <template>
 
-  <label>
-    Time range:
-    <select v-model="selectedTimeRange" class="custom-select" @change="update">
-      <option
-        v-for="(title, value) in timeRanges"
-        :value="value"
-        :key="value"
-      >{{ title }}</option>
-    </select>
-  </label>
-
+  <div class="row mb-1 flex align-items-center">
+    <div class="col-2 font-weight-bold">Time range: </div>
+    <div class="col-10">
+      <select v-model="selectedTimeRange" class="custom-select" @change="update">
+        <option
+          v-for="(title, value) in timeRanges"
+          :value="value"
+          :key="value"
+        >{{ title }}</option>
+      </select>
+    </div>
+  </div>
 
   <div v-if="loader" class="d-flex justify-content-center">
     <div class="spinner-border text-secondary" role="status"/>
   </div>
 
-  <div v-if="apiCallError">
-    <app-alert
-      :message="apiCallError"
-      alert-class="alert-danger"
-      @hide-error="apiCallError = false"
-    />
-  </div>
+  <app-alert v-if="apiCallError" :message="apiCallError" @hide-error="apiCallError = null" />
 
   <div v-if="!chartData.labels.length">
     <div class="alert alert-dark" role="alert">
@@ -100,3 +95,10 @@
   <Line v-else id="statistics-chart" :options="chartOptions" :data="chartData"/>
 
 </template>
+<style scoped>
+
+  .channel-data label {
+    font-weight: bold;
+  }
+
+</style>
