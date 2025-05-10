@@ -10,7 +10,7 @@
 </script>
 
 <template>
-  <div class="alert" :class="alertClass">
+  <div class="alert alert-danger">
     <button type="button" class="close" aria-label="Close" @click="hideAlert()">
       <span aria-hidden="true">&times;</span>
     </button>

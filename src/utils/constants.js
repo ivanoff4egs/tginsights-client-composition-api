@@ -8,7 +8,7 @@ export const TimeRanges = {
 export const ChannelActions = {
   START: 'start',
   STOP: 'stop',
-  LIKE: 'like',
-  DISLIKE: 'dislike'
+  FAVORITE: 'favorite',
+  NOT_FAVORITE: 'not_favorite'
 }
 

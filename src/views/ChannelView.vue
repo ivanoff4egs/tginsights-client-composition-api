@@ -40,7 +40,7 @@
       if (!window.confirm('Channel is favorite. Are you sure?')) {
         return false
       }
-    } else if (action === ChannelActions.LIKE && !channel.value.user_channels[0].active) {
+    } else if (action === ChannelActions.FAVORITE && !channel.value.user_channels[0].active) {
       if (!window.confirm('Channel is stopped. Continue?')) {
         return false
       }
@@ -81,10 +81,10 @@
         </template>
         <template #icon-2>
           <app-tooltip text="Add to favorites" class="float-right ml-2" v-if="!channel.user_channels[0].favorite" >
-            <favorite-icon :is_favorite="false" classes="page-header-icon add-favorite-icon" @click="channelAction(ChannelActions.LIKE)" />
+            <favorite-icon :is_favorite="false" classes="page-header-icon add-favorite-icon" @click="channelAction(ChannelActions.FAVORITE)" />
           </app-tooltip>
           <app-tooltip text="Remove from favorites" class="float-right ml-2" v-if="channel.user_channels[0].favorite">
-            <favorite-icon :is_favorite="true" classes="page-header-icon remove-favorite-icon" @click="channelAction(ChannelActions.DISLIKE)"/>
+            <favorite-icon :is_favorite="true" classes="page-header-icon remove-favorite-icon" @click="channelAction(ChannelActions.NOT_FAVORITE)"/>
           </app-tooltip>
         </template>
         <template #icon-3>
@@ -135,7 +135,7 @@
         </div>
       </div>
 
-      <channel-messages :channel_id="channel._id"></channel-messages>
+      <channel-messages :channel_id="channel._id" />
 
     </div>
   </main>
