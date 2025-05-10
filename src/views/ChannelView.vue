@@ -32,10 +32,6 @@
 
   const channelAction = async (action) => {
 
-    if (loader.value) {
-      return false
-    }
-
     if (action === ChannelActions.STOP && channel.value.user_channels[0].favorite) {
       if (!window.confirm('Channel is favorite. Are you sure?')) {
         return false

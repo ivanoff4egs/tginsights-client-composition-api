@@ -1,6 +1,6 @@
 <script setup>
   const props = defineProps({
-    classes: {type: String},
+    classes: {type: String, required: true},
     is_favorite: {type: Boolean, required: true},
   })
 </script>
