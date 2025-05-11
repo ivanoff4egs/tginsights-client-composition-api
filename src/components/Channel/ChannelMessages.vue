@@ -2,10 +2,14 @@
   import AppAlert from "@/components/App/AppAlert.vue";
   //import MessageSource from "@/components/MessageSource.vue";
   import useApiClient from "@/composables/apiClient.js";
-  //import MessageMatches from "@/components/MessageMatches.vue";
-  //import MessageVersions from "@/components/MessageVersions.vue";
+  import {useRouter} from "vue-router";
+  import MessageVersions from "@/components/Message/MessageVersions.vue";
   import {ref, onMounted} from "vue";
   import {formatDate} from "@/utils/functions.js";
+  import AppTooltip from "@/components/App/AppTooltip.vue";
+  import MatchedMessagesIcon from "@/components/App/Icons/MatchedMessagesIcon.vue";
+
+  const router = useRouter()
 
   const props = defineProps({
       channel_id: {type: String, required: true}
@@ -54,10 +58,13 @@
       <div v-for="message in response.items" :key="message._id">
         <div class="card" :class="{'removed': message.removed}">
           <div class="card-body">
+            <app-tooltip text="Matched messages" class="float-right" placement="bottom">
+              <matched-messages-icon @click="router.push({name: 'message.matches', params: {id: messageId}})"/>
+            </app-tooltip>
+
+            <message-versions v-if="message.versions.length > 0" :versions="message.versions"/>
 <!--
             <message-source @removed="markRemoved" :message="message"/>
-            <message-matches :message-id="message._id" />
-            <message-versions v-if="message.versions.length > 0" :versions="message.versions"/>
 -->
             <h5 class="card-title">{{ formatDate(message.date) }}</h5>
             <p><span>Processed: </span>{{ formatDate(message.created_at) }}</p>
