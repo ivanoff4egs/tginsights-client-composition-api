@@ -10,7 +10,7 @@
 </script>
 
 <template>
-  <div class="alert alert-danger">
+  <div class="alert alert-danger w-100">
     <button type="button" class="close" aria-label="Close" @click="hideAlert()">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -28,7 +28,4 @@
     color: var(--ban-color);
   }
 
-  div.alert-success, div.alert-success .close {
-    color: var(--ok-color)
-  }
 </style>

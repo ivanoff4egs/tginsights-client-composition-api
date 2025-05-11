@@ -11,6 +11,7 @@
   import {formatDate} from "@/utils/functions.js"
   import AppPageHeader from "@/components/App/AppPageHeader.vue";
   import FavoriteIcon from "@/components/App/Icons/FavoriteIcon.vue";
+  import {ChannelActions} from "@/utils/constants.js";
 
   const {apiCallError, loader, response, callApi} = useApiClient()
 
@@ -22,7 +23,7 @@
   }
 
   const remove = async (channel_id) => {
-    await callApi('PATCH', `channel/${channel_id}/dislike`)
+    await callApi('PATCH', `channel/${channel_id}/${ChannelActions.NOT_FAVORITE}`)
     await getChannels()
   }
 
@@ -85,10 +86,6 @@
   </main>
 </template>
 <style scoped>
-
-  .update-icon:hover {
-    color: var(--active-link-color);
-  }
 
   .favorites {
     width: 25em;

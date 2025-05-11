@@ -29,18 +29,19 @@
 <template>
   <div class="row messages">
 
-    <div class="col-12 mt-4">
-      <label class="font-weight-bold">
-        Last messages
-        <select v-model="limit" class="custom-select" @change="update">
-          <option
-            v-for="availableLimit in limits"
-            :key="availableLimit"
-            :value="availableLimit"
-            :selected="{'selected': availableLimit === limit}"
-          >{{ availableLimit }}</option>
-        </select>
+    <div class="mt-4 flex align-items-center w-100 mb-4">
+      <label class="font-weight-bold col-1">
+        Last messages:
       </label>
+      <select v-model="limit" class="custom-select col-11" @change="update">
+        <option
+          v-for="availableLimit in limits"
+          :key="availableLimit"
+          :value="availableLimit"
+          :selected="{'selected': availableLimit === limit}"
+        >{{ availableLimit }}</option>
+      </select>
+
     </div>
 
     <div v-if="loader" class="d-flex justify-content-center w-100">
