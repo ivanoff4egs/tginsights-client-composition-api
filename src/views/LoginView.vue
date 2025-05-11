@@ -5,6 +5,8 @@
   import {useAuthStore} from "@/stores/auth";
   import {ref, computed} from "vue";
 
+  const authStore = useAuthStore()
+
   const username = ref('')
   const password = ref('')
   const redirectTo = ref('/')
@@ -29,9 +31,9 @@
       await callApi('POST', '/login', null, payload)
 
       if (response.value.status === 204) {
-        const auth = useAuthStore()
-        auth.isAuthenticated = true
-        auth.username = username.value
+
+        authStore.isAuthenticated = true
+        authStore.username = username.value
 
         if (route.query.redirectedFrom) {
           redirectTo.value = route.query.redirectedFrom

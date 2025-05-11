@@ -12,3 +12,8 @@ export const ChannelActions = {
   NOT_FAVORITE: 'not_favorite'
 }
 
+export const loginContexts = {
+  DEFAULT: "default",
+  WEB: 'web'
+}
+
