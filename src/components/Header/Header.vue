@@ -1,7 +1,7 @@
 <script setup>
   import {computed, ref, watch} from "vue";
   import {TimeRanges} from "@/utils/constants.js";
-  import {useRoute} from "vue-router";
+  import {useRoute, useRouter} from "vue-router";
   // import HeaderLogOut from "@/components/HeaderLogOut.vue";
   // import HeaderTelegramConnection from "@/components/HeaderTelegramConnection.vue";
   // import HeaderLastMessages from "@/components/HeaderLastMessages.vue";
@@ -21,27 +21,26 @@
   const appVersion = import.meta.env.VITE_APP_VERSION
 
   const route = useRoute()
+  const router = useRouter()
 
   watch(route, (newRoute) => {
     if (newRoute.name === 'messages.search') {
-      searchValue.value = newRoute.params.searchValue
-      strict.value = newRoute.params.strict
-      selectedTimeRange.value = newRoute.params.timerange
+      searchValue.value = newRoute.query.searchValue
+      strict.value = newRoute.query.strict
+      selectedTimeRange.value = newRoute.query.timeRange
     }
   })
 
   const isSearchSubmitAllowed = computed(() => {
-    return searchValue.value && searchValue.value.length > 2
+    return searchValue.value &&  searchValue.value.trim().length > 2
   })
 
   const searchSubmit = () => {
-    if (isSearchSubmitAllowed) {
-
-      console.log([searchValue.value, strict.value, selectedTimeRange.value])
-      // router.push({
-      //   name: 'messages.search',
-      //   params: {searchValue: data, strict: strict, timerange: timerange}
-      // })
+    if (isSearchSubmitAllowed.value) {
+      router.push({
+        name: 'messages.search',
+        query: {searchValue: searchValue.value, strict: strict.value, timeRange: selectedTimeRange.value}
+      })
     }
   }
 </script>

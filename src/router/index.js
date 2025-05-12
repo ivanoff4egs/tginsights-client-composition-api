@@ -32,11 +32,12 @@ const routes = [
     component: () => import('@/views/ChannelView.vue'),
     meta: { requiresAuth: true, showHeader: true }
   },
-  // {
-  //   path: '/messages/search/:searchValue/:strict/:timerange',
-  //   name: 'messages.search',
-  //   component: () => import('@/views/SearchView.vue'),
-  // },
+  {
+    path: '/messages/search',
+    name: 'messages.search',
+    component: () => import('@/views/SearchView.vue'),
+    meta: { requiresAuth: true, showHeader: true }
+  },
   {
     path: '/message/matches/:id',
     name: 'message.matches',

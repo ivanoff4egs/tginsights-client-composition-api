@@ -18,6 +18,7 @@ export default function useApiClient(ignore401Error = false) {
   const auth = useAuthStore()
 
   const callApi = async (httpMethod, path, query = null, payload = null) => {
+
     loader.value = true
     apiCallError.value = null
     response.value = null
