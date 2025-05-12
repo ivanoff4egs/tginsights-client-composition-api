@@ -69,10 +69,10 @@
 
           <h5
             class="card-title channel-link"
-            @click="router.push({'name': 'channel.view', 'params': {'id': channel._id}})"
+            @click="router.push({'name': 'channel.view', 'params': {'source_id': channel.source_id}})"
           >{{channel.name}}</h5>
           <hr/>
-          <h6>{{ formatDate(channel.last_message_date) }}</h6>
+          <h6>{{ formatDate(channel.last_message.date) }}</h6>
           <p><span class="font-weight-bold">Processed at:</span> {{ formatDate(channel.processed_at) }}</p>
           <hr/>
           <div class="message mb-3">
@@ -80,7 +80,7 @@
           </div>
 
           <app-tooltip text="Matched messages" class="float-right" placement="bottom">
-            <matched-messages-icon @click="router.push({name: 'message.matches', params: {id: messageId}})"/>
+            <matched-messages-icon @click="router.push({name: 'message.matches', params: {id: channel.last_message._id}})"/>
           </app-tooltip>
 
           <message-versions v-if="channel.last_message.versions.length > 0" :versions="channel.last_message.versions"/>

@@ -27,7 +27,7 @@
   })
 
   const getChannel = async () => {
-    await callApi('POST', `channel/${route.params.id}`)
+    await callApi('GET', `channel/${route.params.source_id}`)
   }
 
   const channelAction = async (action) => {

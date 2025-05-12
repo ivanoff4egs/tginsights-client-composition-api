@@ -27,7 +27,7 @@ const routes = [
   //   meta: { requiresAuth: true, showHeader: true }
   // },
   {
-    path: '/channel/:id',
+    path: '/channel/:source_id',
     name: 'channel.view',
     component: () => import('@/views/ChannelView.vue'),
     meta: { requiresAuth: true, showHeader: true }
@@ -37,11 +37,12 @@ const routes = [
   //   name: 'messages.search',
   //   component: () => import('@/views/SearchView.vue'),
   // },
-  // {
-  //   path: '/message/matches/:id',
-  //   name: 'message.matches',
-  //   component: () => import('@/views/MatchesView.vue')
-  // },
+  {
+    path: '/message/matches/:id',
+    name: 'message.matches',
+    component: () => import('@/views/MatchesView.vue'),
+    meta: { requiresAuth: true, showHeader: true }
+  },
   // {
   //   path: '/tags',
   //   name: 'tags',
