@@ -57,7 +57,7 @@
         <div class="spinner-border text-secondary" role="status"/>
       </div>
 
-      <app-alert v-if="apiCallError" :message="apiCallError" @hide-alert="apiCallError = null" />
+      <app-alert v-if="apiCallError" :message="apiCallError" @hide="apiCallError = null" />
 
       <div v-if="!response" class="form-group">
         <input

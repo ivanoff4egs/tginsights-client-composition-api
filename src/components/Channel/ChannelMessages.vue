@@ -52,7 +52,9 @@
       <div class="spinner-border text-secondary" role="status"/>
     </div>
 
-    <app-alert v-if="apiCallError" :message="apiCallError" @hide-error="apiCallError = null" />
+    <div v-if="apiCallError">
+      <app-alert :message="apiCallError" @hide="apiCallError = null" />
+    </div>
 
     <div v-if="response" class="col-12 mt-3">
       <div v-for="message in response.items" :key="message._id">

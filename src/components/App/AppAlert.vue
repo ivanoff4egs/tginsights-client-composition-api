@@ -3,15 +3,13 @@
   const props = defineProps({
     message: {type: String, required: true},
   })
-  const emits = defineEmits(['hideAlert'])
-  const hideAlert = () => {
-    emits('hideAlert')
-  }
+  const emits = defineEmits(['hide'])
+
 </script>
 
 <template>
   <div class="alert alert-danger w-100">
-    <button type="button" class="close" aria-label="Close" @click="hideAlert()">
+    <button type="button" class="close" aria-label="Close" @click="emits('hide')">
       <span aria-hidden="true">&times;</span>
     </button>
     <p>{{ props.message }}</p>
@@ -24,7 +22,7 @@
     margin: 0;
   }
 
-  div.alert-danger, div.alert-danger .close {
+  .close {
     color: var(--ban-color);
   }
 

@@ -26,13 +26,13 @@
             class: 'bi bi-tv-fill',
             svg_path: 'M2.5 13.5A.5.5 0 0 1 3 13h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5M2 2h12s2 0 2 2v6s0 2-2 2H2s-2 0-2-2V4s0-2 2-2'
           },
-          // {
-          //   title: 'Channels',
-          //   to: {name: 'channels'},
-          //   icon: 'icons/collection-fill.svg',
-          //   class: 'bi bi-collection-fill',
-          //   svg_path: 'M0 13a1.5 1.5 0 0 0 1.5 1.5h13A1.5 1.5 0 0 0 16 13V6a1.5 1.5 0 0 0-1.5-1.5h-13A1.5 1.5 0 0 0 0 6zM2 3a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 0-1h-11A.5.5 0 0 0 2 3m2-2a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 0-1h-7A.5.5 0 0 0 4 1'
-          // },
+          {
+            title: 'Channels',
+            to: {name: 'channels'},
+            icon: 'icons/collection-fill.svg',
+            class: 'bi bi-collection-fill',
+            svg_path: 'M0 13a1.5 1.5 0 0 0 1.5 1.5h13A1.5 1.5 0 0 0 16 13V6a1.5 1.5 0 0 0-1.5-1.5h-13A1.5 1.5 0 0 0 0 6zM2 3a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 0-1h-11A.5.5 0 0 0 2 3m2-2a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 0-1h-7A.5.5 0 0 0 4 1'
+          },
           // {
           //   title: 'Tags',
           //   to: {name: 'tags'},

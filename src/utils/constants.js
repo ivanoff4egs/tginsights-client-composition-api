@@ -17,5 +17,5 @@ export const loginContexts = {
   WEB: 'web'
 }
 
-export const BACKEND_QUERY_LIMIT = 50
+export const BACKEND_QUERY_LIMIT = 25
 

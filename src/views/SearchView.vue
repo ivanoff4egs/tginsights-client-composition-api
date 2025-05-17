@@ -91,9 +91,7 @@
     </div>
 
     <div v-if="apiCallError">
-      <app-alert :message="apiCallError"
-          @hide-error="apiCallError = null"
-      />
+      <app-alert :message="apiCallError" @hide="apiCallError = null" />
     </div>
 
     <div v-if="response && response.total === 0">

@@ -20,12 +20,12 @@ const routes = [
     component: () => import('@/views/FavoritesView.vue'),
     meta: { requiresAuth: true, showHeader: true }
   },
-  // {
-  //   path: '/channels',
-  //   name: 'channels',
-  //   component: () => import('@/views/ChannelsView.vue'),
-  //   meta: { requiresAuth: true, showHeader: true }
-  // },
+  {
+    path: '/channels',
+    name: 'channels',
+    component: () => import('@/views/ChannelsView.vue'),
+    meta: { requiresAuth: true, showHeader: true }
+  },
   {
     path: '/channel/:source_id',
     name: 'channel.view',

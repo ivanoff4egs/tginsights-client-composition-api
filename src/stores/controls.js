@@ -1,19 +1,29 @@
 import { defineStore } from "pinia";
+import {reactive} from "vue";
 
-export const useControlsStore = defineStore('controls', {
-  state: () => ({
-    channels: {
+export const useControlsStore = defineStore('controls', () => {
+  const getDefaultChannelsPage = () => {
+    return {
       filters: {
         active: true,
         name: ''
       },
-      sortables: {
-        'created_at': -1,
-        'user_channels.subscribed_at': -1,
-        'participants_count': -1,
-        'processed_at': -1,
-        'last_message_date': -1
-      },
-      currentSort: {'last_message_date': -1}
-  }}),
+      currentSort: { 'last_message_date': -1 }
+    }
+  }
+
+  const channelsPage = reactive(getDefaultChannelsPage())
+
+  function resetChannelsPage() {
+    const defaults = getDefaultChannelsPage()
+
+    channelsPage.filters.active = defaults.filters.active
+    channelsPage.filters.name = defaults.filters.name
+    channelsPage.currentSort = defaults.currentSort
+  }
+
+  return {
+    channelsPage,
+    resetChannelsPage
+  }
 })

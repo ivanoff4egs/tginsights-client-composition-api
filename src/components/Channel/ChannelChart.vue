@@ -82,7 +82,9 @@
     <div class="spinner-border text-secondary" role="status"/>
   </div>
 
-  <app-alert v-if="apiCallError" :message="apiCallError" @hide-error="apiCallError = null" />
+  <div v-if="apiCallError">
+    <app-alert :message="apiCallError" @hide="apiCallError = null" />
+  </div>
 
   <div v-if="!chartData.labels.length">
     <div class="alert alert-dark" role="alert">
