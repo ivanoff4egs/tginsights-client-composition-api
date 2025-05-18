@@ -15,7 +15,7 @@ export default function useApiClient(ignore401Error = false) {
 
   const router = useRouter()
   const route = useRoute()
-  const auth = useAuthStore()
+  const {setUnauthorized} = useAuthStore()
 
   const callApi = async (httpMethod, path, query = null, payload = null) => {
 
@@ -34,8 +34,7 @@ export default function useApiClient(ignore401Error = false) {
       response.value = res.status === 204 ? res : res.data
     } catch (error) {
       if (error.status === 401 && !ignore401Error) {
-        auth.username = null
-        auth.isAuthenticated = false
+        setUnauthorized()
         await router.replace({name: 'login', query: {redirectedFrom: route.fullPath}})
       } else {
         apiCallError.value =

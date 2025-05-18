@@ -5,7 +5,7 @@
   import {useAuthStore} from "@/stores/auth";
   import {ref, computed} from "vue";
 
-  const authStore = useAuthStore()
+  const {setAuthorized} = useAuthStore()
 
   const username = ref('')
   const password = ref('')
@@ -32,8 +32,7 @@
 
       if (response.value.status === 204) {
 
-        authStore.isAuthenticated = true
-        authStore.username = username.value
+        setAuthorized(username.value)
 
         if (route.query.redirectedFrom) {
           redirectTo.value = route.query.redirectedFrom
