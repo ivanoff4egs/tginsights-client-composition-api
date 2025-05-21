@@ -1,6 +1,6 @@
 <script setup>
   import AppSidebar from "@/components/App/AppSidebar.vue";
-  import SearchMessage from "@/components/SearchMessage.vue";
+  import SearchMessage from "@/components/Search/SearchMessage.vue";
   import AppAlert from "@/components/App/AppAlert.vue";
   import AppTooltip from "@/components/App/AppTooltip.vue";
   import useApiClient from "@/composables/apiClient";

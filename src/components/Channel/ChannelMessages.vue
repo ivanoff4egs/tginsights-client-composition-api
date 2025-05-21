@@ -42,7 +42,6 @@
           v-for="availableLimit in limits"
           :key="availableLimit"
           :value="availableLimit"
-          :selected="{'selected': availableLimit === limit}"
         >{{ availableLimit }}</option>
       </select>
 

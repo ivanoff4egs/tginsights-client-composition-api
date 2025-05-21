@@ -17,10 +17,10 @@
   const offset = ref(0)
   const sortables = {
     'created_at': -1,
-      'user_channels.subscribed_at': -1,
-      'participants_count': -1,
-      'processed_at': -1,
-      'last_message_date': -1
+    'user_channels.subscribed_at': -1,
+    'participants_count': -1,
+    'processed_at': -1,
+    'last_message_date': -1
   }
 
   const statuses = {'Any': null, 'Active': true, 'Stopped': false}

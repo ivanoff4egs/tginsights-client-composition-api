@@ -44,16 +44,18 @@ const routes = [
     component: () => import('@/views/MatchesView.vue'),
     meta: { requiresAuth: true, showHeader: true }
   },
-  // {
-  //   path: '/tags',
-  //   name: 'tags',
-  //   component: () => import('@/views/TagsView.vue'),
-  // },
-  // {
-  //   path: '/tag/search/:tagName',
-  //   name: 'tag.search',
-  //   component: () => import('@/views/TagSearchView.vue')
-  // },
+  {
+    path: '/tags',
+    name: 'tags',
+    component: () => import('@/views/TagsView.vue'),
+    meta: { requiresAuth: true, showHeader: true }
+  },
+  {
+    path: '/tag/search/:tagName',
+    name: 'tag.search',
+    component: () => import('@/views/TagSearchView.vue'),
+    meta: { requiresAuth: true, showHeader: true }
+  },
   // {
   //   path: '/telegram/auth/:context',
   //   name: 'telegram.auth',

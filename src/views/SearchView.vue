@@ -2,9 +2,9 @@
   import AppSidebar from "@/components/App/AppSidebar.vue";
   import AppAlert from "@/components/App/AppAlert.vue";
   import AppPaginator from "@/components/App/AppPaginator.vue";
-  import TagEditPopup from "@/components/TagEditPopup.vue";
+  import TagEditPopup from "@/components/Tags/TagEditPopup.vue";
   import AppTooltip from "@/components/App/AppTooltip.vue";
-  import SearchMessage from "@/components/SearchMessage.vue";
+  import SearchMessage from "@/components/Search/SearchMessage.vue";
   import {useRoute, useRouter} from "vue-router";
   import useApiClient from "@/composables/apiClient";
   import {onMounted, reactive, ref} from "vue";
