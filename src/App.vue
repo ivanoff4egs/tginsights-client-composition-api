@@ -14,7 +14,7 @@
 
   <div class="container-fluid">
     <div class="row">
-      <RouterView :key="route.fullPath"/>
+      <RouterView />
     </div>
   </div>
 

@@ -2,64 +2,49 @@
   import AppSidebar from "@/components/App/AppSidebar.vue";
   import AppAlert from "@/components/App/AppAlert.vue";
   import AppPaginator from "@/components/App/AppPaginator.vue";
-  import TagEditPopup from "@/components/Tags/TagEditPopup.vue";
   import AppTooltip from "@/components/App/AppTooltip.vue";
-  import SearchMessage from "@/components/Search/SearchMessage.vue";
-  import {useRoute, useRouter} from "vue-router";
   import useApiClient from "@/composables/apiClient";
-  import {onMounted, reactive, ref} from "vue";
-  import {BACKEND_QUERY_LIMIT} from "@/utils/constants.js";
+  import SearchMessage from "@/components/Search/SearchMessage.vue";
+  import {useRoute} from "vue-router";
+  import {onMounted} from "vue";
   import AppPageHeader from "@/components/App/AppPageHeader.vue";
-  import SaveIcon from "@/components/App/Icons/SaveIcon.vue";
-  import BackwardIcon from "@/components/App/Icons/BackwardIcon.vue";
+  import RefreshIcon from "@/components/App/Icons/RefreshIcon.vue";
+  import {BACKEND_QUERY_LIMIT} from "@/utils/constants.js";
 
   const route = useRoute()
-  const router = useRouter()
 
-  const {response, apiCallError, loader, callApi} = useApiClient()
-
-  const showSaveTag =ref(false)
+  const {loader, response, apiCallError, callApi} = useApiClient()
 
   onMounted(() => {
-    search(0)
+    getMessages()
   })
-  const search = async (offset) => {
-
-    await callApi(
-      'GET',
-      'messages/search',
-      {
-        strict: route.query.strict,
-        time_range: route.query.timeRange,
-        search_value: route.query.searchValue,
-        per_page: BACKEND_QUERY_LIMIT,
-        offset: offset
-      }
-    )
-  }
 
   const handlePaginate = async (offset) => {
-      await search(offset)
-      window.scrollTo(0, 0)
+    await getMessages(offset)
+    window.scrollTo(0, 0)
   }
 
+  const getMessages = async (offset=0) => {
+
+    await callApi(
+        'GET',
+        `/messages/search/tag/${route.params.tagName}`,
+        {per_page: BACKEND_QUERY_LIMIT, offset: offset}
+    )
+  }
 </script>
 
 <template>
-  <app-sidebar />
+
+  <app-sidebar/>
 
   <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
 
     <app-page-header>
-      <template #title> Messages search</template>
+      <template #title>Search by Tag: #{{route.params.tagName}}</template>
       <template #icon-0>
-        <app-tooltip text="Save search tag" class="float-right ml-2">
-          <save-icon @click="showSaveTag = true"/>
-        </app-tooltip>
-      </template>
-      <template #icon-1>
-        <app-tooltip text="Go back" class="float-right">
-          <backward-icon @click="router.back()" />
+        <app-tooltip text="Update search tag" class="float-right">
+          <refresh-icon @click="getMessages"></refresh-icon>
         </app-tooltip>
       </template>
     </app-page-header>
@@ -90,16 +75,13 @@
       />
     </keep-alive>
 
-    <tag-edit-popup
-      v-if="showSaveTag"
-      @saved="showSaveTag = false"
-      @close="showSaveTag = false"
-      @keyup.esc="showSaveTag = false"
-    />
-
   </main>
 </template>
 
 <style scoped>
+
+  .update-icon:hover {
+    color: var(--active-link-color)
+  }
 
 </style>

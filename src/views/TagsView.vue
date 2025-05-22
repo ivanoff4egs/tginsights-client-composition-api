@@ -27,7 +27,7 @@
       )
   }
 
-  const removeTag = async(id) => {
+  const removeTag = async (id) => {
     if (window.confirm('Are you sure?')) {
       await callApi('DELETE', `/tag/remove/${id}`)
 
@@ -43,6 +43,7 @@
   const handlePaginate = async (currentOffset) => {
     offset.value = currentOffset
     await getTags()
+    window.scrollTo(0, 0)
   }
 
   const handleSaved = async () => {

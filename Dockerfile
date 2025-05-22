@@ -2,10 +2,8 @@ FROM node:lts-alpine
 
 RUN apk update
 
-#RUN yarn add global @vue/cli
-
 WORKDIR /srv/app
-#ADD package.json package.json
-#RUN npm install
+ADD package.json package.json
+RUN npm install
 
-#ENTRYPOINT ["/bin/sh", "-c", "yarn install && yarn run serve"]
+ENTRYPOINT ["/bin/sh", "-c", "npm run dev -- --host 0.0.0.0 --port 8081"]

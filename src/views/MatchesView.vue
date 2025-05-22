@@ -13,8 +13,8 @@
   const route = useRoute()
   const router = useRouter()
 
-  onMounted(async () => {
-    await callApi('GET', `/message/matches/${route.params.id}`)
+  onMounted(() => {
+    callApi('GET', `/message/matches/${route.params.id}`)
   })
 
 </script>

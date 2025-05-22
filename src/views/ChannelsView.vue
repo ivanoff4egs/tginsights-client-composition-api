@@ -64,6 +64,7 @@
   const handlePaginate = async (currentOffset) => {
       offset.value = currentOffset
       await getChannels()
+      window.scrollTo(0, 0)
   }
 
   const handleSort = async (sortParams) => {

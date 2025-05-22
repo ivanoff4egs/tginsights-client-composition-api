@@ -3,6 +3,8 @@
   import AppAlert from "@/components/App/AppAlert.vue";
   import useApiClient from "@/composables/apiClient.js";
   import {ref, onMounted} from "vue";
+  import {useRoute} from "vue-router";
+
 
   const props = defineProps({
     id: {type: String},
@@ -17,8 +19,19 @@
 
   const emits = defineEmits(['close', 'saved'])
 
+  const route = useRoute()
+
   onMounted (() => {
-    getTag()
+    if (props.id) {
+      getTag()
+    } else {
+      localTag.value = {
+        name: "",
+        timerange: route.query.timeRange,
+        values: [route.query.searchValue]
+      }
+    }
+
   })
 
   const addSearchValueInput = () => {
