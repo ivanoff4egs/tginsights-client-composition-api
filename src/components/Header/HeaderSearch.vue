@@ -1,9 +1,8 @@
 <script setup>
-import {useRoute, useRouter} from "vue-router";
-import {computed, ref, reactive, watch, onMounted} from "vue";
+import {useRouter} from "vue-router";
+import {computed, reactive} from "vue";
 import {TimeRanges} from "@/utils/constants.js";
 
-  const route = useRoute()
   const router = useRouter()
 
   const defaultSearchParams = {
