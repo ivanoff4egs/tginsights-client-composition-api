@@ -1,7 +1,4 @@
 <script setup>
-  import {computed, ref, watch} from "vue";
-  import {TimeRanges} from "@/utils/constants.js";
-  import {useRoute, useRouter} from "vue-router";
   import HeaderSearch from "@/components/Header/HeaderSearch.vue";
 
   const appVersion = import.meta.env.VITE_APP_VERSION
