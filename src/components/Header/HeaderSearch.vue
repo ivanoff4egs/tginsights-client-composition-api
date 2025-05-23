@@ -1,10 +1,10 @@
 <script setup>
-import {useRouter} from "vue-router";
-import {computed, reactive} from "vue";
-import {TimeRanges} from "@/utils/constants.js";
+  import {useRouter} from "vue-router";
+  import {computed, reactive} from "vue";
+  import {TimeRanges} from "@/utils/constants.js";
 
   const router = useRouter()
-
+  //TODO move search form state to Pinia
   const defaultSearchParams = {
     strict: true,
     searchValue: "",

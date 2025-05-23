@@ -3,9 +3,11 @@
   import useApiClient from "@/composables/apiClient.js";
   import {useRoute, useRouter} from "vue-router";
   import {useAuthStore} from "@/stores/auth";
-  import {ref, computed} from "vue";
+  import {ref, computed, onMounted} from "vue";
+  import {useControlsStore} from "@/stores/controls.js";
 
-  const {setAuthorized} = useAuthStore()
+  const {setAuthorized, setUnauthorized} = useAuthStore()
+  const {resetChannelsPage} = useControlsStore()
 
   const username = ref('')
   const password = ref('')
@@ -20,6 +22,11 @@
 
   const {apiCallError, loader, response, callApi} = useApiClient(true)
 
+  onMounted(() => {
+    setUnauthorized()
+    resetChannelsPage()
+  })
+
   const submitCredentials = async () => {
 
     if (isSubmitEnabled) {
@@ -30,7 +37,7 @@
 
       await callApi('POST', '/login', null, payload)
 
-      if (response.value.status === 204) {
+      if (response.value && response.value.status === 204) {
 
         setAuthorized(username.value)
 

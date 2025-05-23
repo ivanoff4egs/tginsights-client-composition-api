@@ -1,5 +1,6 @@
 <script setup>
   import HeaderSearch from "@/components/Header/HeaderSearch.vue";
+  import HeaderLogOut from "@/components/Header/HeaderLogOut.vue";
 
   const appVersion = import.meta.env.VITE_APP_VERSION
 
@@ -8,10 +9,11 @@
   <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
     <a href="/" class="navbar-brand col-sm-3 col-md-2 mr-0">tgInsights <span class="version">v{{ appVersion }}</span></a>
     <header-search />
+    <header-log-out />
     <!--
         <header-last-messages />
         <header-telegram-connection />
-        <header-log-out />
+
     -->
   </nav>
 </template>
@@ -24,8 +26,6 @@
     background-color: rgba(0, 0, 0, .25);
     box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
   }
-
-
 
   .version {
     font-weight: normal;

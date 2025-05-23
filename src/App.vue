@@ -4,8 +4,6 @@
   import Header from "@/components/Header/Header.vue";
 
   const route = useRoute()
-  //const router = useRouter()
-
 
 </script>
 
